@@ -1,6 +1,14 @@
 <?php
-// 与えられたから文字列からn文字ずらしたの文字列(アルファベット)を調べる関数
-function str_rotN($str, $num) {
+/**
+ * rotN($str, $num)
+ * Function to find the character (alphabet)
+ * shifted n characters from the specified character.
+ *
+ * @param string $str Start position of the shift (any alphabet)
+ * @param int $num Number of characters to shift the alphabet by
+ * @return string
+ */
+function rotN(string $str, int $num) {
     if (!is_numeric($num)) {
         return $str;
     }
