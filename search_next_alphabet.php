@@ -19,4 +19,3 @@ function str_rotN($str, $num) {
     $str = strtr($str, strtoupper($abc), strtoupper($to));
     return $str;
 }
-str_rotN('d', -45431);
