@@ -1,0 +1,43 @@
+/**
+* 公開可能な問題
+* https://paiza.jp/works/mondai/c_rank_level_up_problems/c_rank_string_boss/edit?language_uid=php
+*/
+<?php
+    $N = trim(fgets(STDIN));
+    for ($i = 0; $i < $N; $i++) {
+        // 行の分解
+        list($base, $h, $m) = explode(" ",trim(fgets(STDIN)));
+        
+        // 基準時間の分解
+        list($bh, $bm) = explode(":", $base);
+        
+        // hourの合計
+        $sumH =(int)$bh + (int)$h;
+        // minの合計
+        $sumM = (int)$bm + (int)$m;
+        
+        // 分の繰り上げ処理
+        if ($sumM === 60) {
+            $sumM = '00';
+            $sumH++;
+        }
+        if ((int)$sumM > 60) {
+            $sumM = abs($sumM - 60);
+            $sumH++;
+        }
+        
+        // 時間の繰り上げ処理
+        if ($sumH === 24) {
+               $sumH = "00";
+        }
+        if($sumH > 24) {
+            $sumH = $sumH - 24;
+        }
+        echo pad($sumH) . ":" . pad($sumM) . "\n";
+        
+    } 
+    
+    function pad($num) {
+        return str_pad($num, 2, 0, STR_PAD_LEFT);
+    }
+?>
