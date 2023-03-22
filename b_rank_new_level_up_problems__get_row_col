@@ -1,0 +1,84 @@
+<?php
+    /**
+    * 問題/解答ともに公開可能な出題
+    * https://paiza.jp/works/mondai/b_rank_new_level_up_problems/b_rank_new_level_up_problems__get_row_col
+    **/
+    list($h, $w) = explode(' ', trim(fgets(STDIN)));
+    $arr = [];
+    for ($i = 0; $i < $h; $i++) {
+        $arr[$i] = trim(fgets(STDIN));
+    }
+    
+    list($y, $x) = explode(' ', trim(fgets(STDIN)));
+    
+    // 指定座標$y, $xの処理
+    if ($arr[$y][$x] === '#') {
+        $arr[$y][$x] = '.';
+    } else {
+      $arr[$y][$x] = '#';  
+    }
+   
+    // x座標と同じ縦の処理($hの行数分だけ処理をする) 
+   for ($i = 0; $i < $h; $i++) {
+       if ($arr[$i][$x] === '#') {
+           $arr[$i][$x] = '.';
+       } else {
+           $arr[$i][$x] = '#';
+       }
+   }
+   
+    // y座標と同じ横の処理($wの文字数分だけ処理をする)
+    for ($i = 0; $i < $w; $i++) {
+        if ($arr[$y][$i] === '#') {
+           $arr[$y][$i] = '.';
+       } else {
+           $arr[$y][$i] = '#';
+       }
+    }
+    
+    // 斜めの処理
+    for ($i = 1; $i < min([$h, $w]); $i++) {
+        // 右斜め下
+        if ($y + $i < $h) {
+            if ($x + $i < $w) {
+                if ($arr[$y + $i][$x + $i] === '#') {
+                    $arr[$y + $i][$x + $i] = '.';
+                } else {
+                    $arr[$y + $i][$x + $i] = '#';
+                }
+            }
+            
+            // 左斜め下
+            if (0 <= $x - $i) {
+                if ($arr[$y + $i][$x - $i] === '#') {
+                    $arr[$y + $i][$x - $i] = '.';
+                } else {
+                    $arr[$y + $i][$x - $i] = '#';
+                }
+            }
+        } 
+        
+        // 右斜め上
+        if (0 <= $y - $i) {
+            if ($x + $i < $w) {
+                if ($arr[$y - $i][$x + $i] === '#') {
+                    $arr[$y - $i][$x + $i] = '.';
+                } else {
+                    $arr[$y - $i][$x + $i] = '#';
+                }
+            }
+            
+            if (0 <= $x - $i) {
+                if ($arr[$y - $i][$x - $i] === '#') {
+                    $arr[$y - $i][$x - $i] = '.';
+                } else {
+                    $arr[$y - $i][$x - $i] = '#';
+                }
+            }
+        }
+    }
+    
+    foreach ($arr as $value) {
+        echo $value . "\n";
+    }
+?>
